@@ -11,8 +11,8 @@
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
 			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/jschool" />
-			<property name="javax.persistence.jdbc.user" value="jschool" />
-			<property name="javax.persistence.jdbc.password" value="jschool" />
+			<property name="javax.persistence.jdbc.user" value="postgres" />
+			<property name="javax.persistence.jdbc.password" value="1545410276000" />
 			<property name="hibernate.show_sql" value="true" />
 		</properties>
 	</persistence-unit>

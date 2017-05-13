@@ -3,161 +3,201 @@
 <html>
 	<head>
 		<title>JSchool</title>
-		<style>
-			.username.ng-valid {
-				background-color: lightgreen;
+	  	<style type="text/css">
+			.generic-container {
+				width:60%;
+				margin: auto;
+				margin-top: 20px;
+				margin-bottom: 20px;
+				padding: 20px;
+				background-color: #EAE7E7;
+				border: 1px solid #ddd;
+				border-radius: 10px;
+				box-shadow: 0 0 30px black;
 			}
-			
-			.username.ng-dirty.ng-invalid-required {
-				background-color: red;
+			.userForm{
+				width:80%;
+				margin: auto;
+				margin-top: 20px;
+				margin-bottom: 20px;
+				padding: 20px;
+				background-color: #E7EAE7;
+				border: 1px solid #ddd;
+				border-radius: 10px;
 			}
-			
-			.username.ng-dirty.ng-invalid-minlength {
-				background-color: yellow;
+			.user-input {
+				width:80%;
+				margin:5px;
+			}
+			.userForm-button {
+				width:100px;
+				height:30px;
+				border-radius: 4px;
+			}
+			.usersTable-panel {
+				width:85%;
+				margin: auto;
+				margin-top: 20px;
+				margin-bottom: 20px;
+				padding: 20px;
+				
+			}
+			.usersTable {
+				width:100%;
+				font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+				font-size: 14px;
+				border-radius: 10px;
+				border-spacing: 0;
+				text-align: center;
+			}
+			.th {
+				background: #BCEBDD;
+				color: white;
+				text-shadow: 0 1px 1px #2D2020;
+				padding: 10px 20px;
+			}
+			.th, .td {
+				border-style: solid;
+				border-width: 0 1px 1px 0;
+				border-color: #EAE5E5;
+			}
+			.th:first-child, .td:first-child {
+				text-align: left;
+			}
+			.th:first-child {
+				border-top-left-radius: 10px;
+			}
+			.th:last-child {
+				border-top-right-radius: 10px;
+				border-right: none;
+			}
+			.td {
+				padding: 10px 20px;
+				background: #F8E391;
+			}
+			.tr:last-child td:first-child {
+				border-radius: 0 0 0 10px;
+			}
+			.tr:last-child .td:last-child {
+				border-radius: 0 0 10px 0;
+			}
+			.tr .td:last-child {
+				border-right: none;
 			}
 			
 		</style>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
-        <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"/>
 	</head>
 	<body ng-app="jschoolApp" class="ng-cloak">
 		<div class="generic-container" ng-controller="UserController as ctrl">
-			<div class="panel panel-default">
-				<div class="panel-heading"><span class="lead">User Registration Form </span></div>
-				<div class="formcontainer">
-					<form ng-submit="ctrl.submit()" name="userForm" class="form-horizontal">
-						<input type="hidden" ng-model="ctrl.user.id" />
-						<div class="row">
-							<div class="form-group col-md-12">
-								<label class="col-md-2 control-lable" for="file">First name *</label>
-								<div class="col-md-7">
-									<input type="text" ng-model="ctrl.user.firstName" name="firstName" class="firstName form-control input-sm" placeholder="Enter your first name" required ng-minlength="1"/>
-									<div class="has-error" ng-show="userForm.$dirty">
-                                    	<span ng-show="userForm.firstName.$error.required">This is a required field</span>
-                                    	<span ng-show="userForm.firstName.$error.minlength">Minimum length required is 1</span>
-                                    	<span ng-show="userForm.firstName.$invalid">This field is invalid </span>
-                                  	</div>
-								</div>
-							</div>
-						</div>
+			<form name="userForm" ng-submit="ctrl.submit()" class="userForm">
+				
+				<input type="hidden" ng-model="ctrl.user.id"/>
+				<table style="width:100%;">
+				<caption style="font-size:32">User registration form</caption>
+					<tr>
+						<td valign="middle">First name *</td>
+						<td valign="middle">
+							<input type="text" name="firstName" ng-model="ctrl.user.firstName" class="firstName user-input" placeholder="Enter your first name" required>
+							<div style="color:red" ng-show="userForm.$dirty">
+		                        <span ng-show="userForm.firstName.$error.required">This is a required field</span>
+		                        <span ng-show="userForm.firstName.$invalid">This field is invalid </span>
+		          			</div>
+						</td>
+					</tr>
+					<tr>
+						<td valign="middle">Last name *</td>
+						<td valign="middle">
+							<input type="text" name="lastName" ng-model="ctrl.user.lastName" class="firstName user-input" placeholder="Enter your last name" required>
+							<div style="color:red" ng-show="userForm.$dirty">
+		                        <span ng-show="userForm.lastName.$error.required">This is a required field</span>
+		                        <span ng-show="userForm.lastName.$invalid">This field is invalid </span>
+		          			</div>
+						</td>
+					</tr>
+					<tr>
+						<td valign="middle">Birthday </td>
+						<td valign="middle">
+							<input type="date" name="birthDay" ng-model="ctrl.user.birthDay" class="birthDay user-input" norequired>
+						</td>
+					</tr>
+					<tr>
+						<td valign="middle">Login *</td>
+						<td valign="middle">
+							<input type="text" name="login" ng-model="ctrl.user.login" class="login user-input" placeholder="Enter your login" required ng-minlength="3">
+							<div style="color:red" ng-show="userForm.$dirty">
+		                        <span ng-show="userForm.login.$error.required">This is a required field</span>
+		                        <span ng-show="userForm.login.$error.minlength">Minimum length required is 3</span>
+		                        <span ng-show="userForm.login.$invalid">This field is invalid </span>
+		          			</div>
+						</td>
+					</tr>
+					<tr>
+						<td valign="middle">Password *</td>
+						<td valign="middle">
+							<input type="password" name="password" ng-model="ctrl.user.password" class="password user-input" placeholder="Enter your password" required ng-minlength="6">
+							<div style="color:red" ng-show="userForm.$dirty">
+		                        <span ng-show="userForm.password.$error.required">This is a required field</span>
+		                        <span ng-show="userForm.password.$error.minlength">Minimum length required is 6</span>
+		                        <span ng-show="userForm.password.$invalid">This field is invalid </span>
+		          			</div>
+						</td>
+					</tr>
+					<tr>
+						<td valign="middle">About </td>
+						<td valign="middle">
+							<input type="text" name="about" ng-model="ctrl.user.about" class="about user-input" placeholder="Enter about yourself" norequired>
+						</td>
+					</tr>
+					<tr>
+						<td valign="middle">Address </td>
+						<td valign="middle">
+							<input type="text" name="address" ng-model="ctrl.user.address" class="address user-input" placeholder="Enter your address" norequired>
+						</td>
+					</tr>
+					
+
+				</table >
+				
+				<div align="right">
+					<input type="submit"  value="{{!ctrl.user.id ? 'Add' : 'Update'}}" style="background:#A5A5EA;width:100px;height:30px;border-radius:4px;border:1px solid #A5A5EA" class="userForm-button" ng-disabled="userForm.$invalid">
 						
+					<button type="button" ng-click="ctrl.reset()" class="userForm-button" style="background:#EAA5A5;width:100px;height:30px;border-radius:4px;border:1px solid #EAA5A5" ng-disabled="userForm.$pristine">Reset Form</button>
 						
-						<div class="row">
-							<div class="form-group col-md-12">
-								<label class="col-md-2 control-lable" for="file">Last name *</label>
-								<div class="col-md-7">
-									<input type="text" ng-model="ctrl.user.lastName" name="lastName" class="lastName form-control input-sm" placeholder="Enter your last name" required ng-minlength="1"/>
-									<div class="has-error" ng-show="userForm.$dirty">
-                                    	<span ng-show="userForm.lastName.$error.required">This is a required field</span>
-                                    	<span ng-show="userForm.lastName.$error.minlength">Minimum length required is 1</span>
-                                    	<span ng-show="userForm.lastName.$invalid">This field is invalid </span>
-                                  	</div>
-								</div>
-							</div>
-						</div>
-						
-						
-						<div class="row">
-							<div class="form-group col-md-12">
-								<label class="col-md-2 control-lable" for="file">Birthday</label>
-								<div class="col-md-7">
-									<input type="date" ng-model="ctrl.user.birthDay" name="birthDay" class="form-control input-sm" placeholder="Enter your birthday"/>
-									
-								</div>
-							</div>
-						</div>
-						
-						
-						<div class="row">
-							<div class="form-group col-md-12">
-								<label class="col-md-2 control-lable" for="file">Login *</label>
-								<div class="col-md-7">
-									<input type="text" ng-model="ctrl.user.login" name="login" class="login form-control input-sm" placeholder="Enter your login" required ng-minlength="3"/>
-									<div class="has-error" ng-show="userForm.$dirty">
-	                                   	<span ng-show="userForm.login.$error.required">This is a required field</span>
-	                                   	<span ng-show="userForm.login.$error.minlength">Minimum length required is 3</span>
-	                                   	<span ng-show="userForm.login.$invalid">This field is invalid </span>
-	                               	</div>
-                               	</div>
-							</div>
-						</div>
-						
-						
-						<div class="row">
-							<div class="form-group col-md-12">
-								<label class="col-md-2 control-lable" for="file">Password *</label>
-								<div class="col-md-7">
-									<input type="password" ng-model="ctrl.user.password" name="password" class="password form-control input-sm" placeholder="Enter your password" required ng-minlength="6"/>
-									<div class="has-error" ng-show="userForm.$dirty">
-	                                   	<span ng-show="userForm.password.$error.required">This is a required field</span>
-	                                   	<span ng-show="userForm.password.$error.minlength">Minimum length required is 6</span>
-	                                   	<span ng-show="userForm.password.$invalid">This field is invalid </span>
-	                               	</div>
-                               	</div>
-							</div>
-						</div>
-						
-						
-						<div class="row">
-							<div class="form-group col-md-12">
-								<label class="col-md-2 control-lable" for="file">About yourself</label>
-								<div class="col-md-7">
-									<input type="text" ng-model="ctrl.user.about" name="about" class="about form-control input-sm"/>
-                               	</div>
-							</div>
-						</div>
-						
-						
-						<div class="row">
-							<div class="form-group col-md-12">
-								<label class="col-md-2 control-lable" for="file">Address</label>
-								<div class="col-md-7">
-									<input type="text" ng-model="ctrl.user.address" name="address" class="address form-control input-sm" placeholder="Enter your address"/>
-                               	</div>
-							</div>
-						</div>
-						
-						
-						<div class="row">
-	                        <div class="form-actions floatRight">
-	                            <input type="submit"  value="{{!ctrl.user.id ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="userForm.$invalid">
-	                            <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="userForm.$pristine">Reset Form</button>
-	                        </div>
-                      	</div>
-						
-					</form>
-				</div>
-			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading"><span class="lead">List of Users </span></div>
-				<div class="tablecontainer">
-					<table class="table table-hover">
-						<thead>
-	                        <tr>
-	                            <th>ID.</th>
-	                            <th>Name</th>
-	                            <th>Login</th>
-	                            <th>Address</th>
-	                            <th width="20%"></th>
-	                        </tr>
-                    	</thead>
-                    	<tbody>
-                    		<tr ng-repeat="u in ctrl.users">
-                    			<td><span ng-bind="u.id"></span></td>
-                    			<td><span ng-bind="u.firstName"></span> <span ng-bind="u.lastName"></span></td>
-                    			<td><span ng-bind="u.login"></span></td>
-                    			<td><span ng-bind="u.address"></span></td>
-                    			<td>
-                              		<button type="button" ng-click="ctrl.edit(u.id)" class="btn btn-success custom-width">Edit</button>
-                              		<button type="button" ng-click="ctrl.remove(u.id)" class="btn btn-danger custom-width">Remove</button>
-                              	</td>
-                    		</tr>
-                    	</tbody>
-					</table>
-				</div>
+				</div>	
+				
+			</form>
+		
+			<div class="usersTable-panel">
+			
+				<table class="usersTable">
+					<caption style="font-size:32">List of users</caption>
+					<thead>
+	                    <tr class="tr">
+	                        <th class="th">ID.</th>
+	                        <th class="th">Name</th>
+	                        <th class="th">Login</th>
+	                        <th class="th">Address</th>
+	                        <th class="th" ></th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                    <tr class="tr" ng-repeat="u in ctrl.users">
+	                        <td class="td"><span ng-bind="u.id"></span></td>
+	                        <td class="td">
+	                        	<span ng-bind="u.firstName"></span> <span ng-bind="u.lastName"></span>
+	                        </td>
+	                        <td class="td"><span ng-bind="u.login"></span></td>
+	                        <td class="td"><span ng-bind="u.address"></span></td>
+	                        <td class="td" style="width:120px">
+	                        
+	                        	<button type="button" ng-click="ctrl.edit(u.id)" style="background:#A5EAA5;width:33%;height:30px;border-radius:4px;border:1px solid #A5EAA5">Edit</button>
+	                        	<button type="button" ng-click="ctrl.remove(u.id)" style="background:#EAA5A5;width:53%;height:30px;border-radius:4px;border:1px solid #EAA5A5">Remove</button>
+	                        </td>
+	                    </tr>
+	                </tbody>
+				</table>
 			</div>
 		</div>
-		
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
 		<script src="<c:url value='/static/js/app.js' />"></script>
 		<script src="<c:url value='/static/js/service/user_service.js' />"></script>
