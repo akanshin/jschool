@@ -1,4 +1,4 @@
-package ru.akanshin.jschool.data;
+package ru.akanshin.jschool.service;
 
 import java.util.List;
 

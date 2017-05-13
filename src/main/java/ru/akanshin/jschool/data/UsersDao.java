@@ -7,12 +7,12 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import ru.akanshin.jschool.data.model.User;
 
-@Service("userService")
-public class UsersDao implements UserService {
+@Repository("usersDao")
+public class UsersDao {
 	private static UsersDao instance;
 
 	public static UsersDao getInstance() {

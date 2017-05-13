@@ -5,7 +5,7 @@
 		<title>JSchool</title>
 	  	<style type="text/css">
 			.generic-container {
-				width:60%;
+				width:80%;
 				margin: auto;
 				margin-top: 20px;
 				margin-bottom: 20px;
@@ -175,8 +175,10 @@
 	                    <tr class="tr">
 	                        <th class="th">ID.</th>
 	                        <th class="th">Name</th>
+	                        <th class="th">Birthday</th>
 	                        <th class="th">Login</th>
 	                        <th class="th">Address</th>
+	                        <th class="th">About</th>
 	                        <th class="th" ></th>
 	                    </tr>
 	                </thead>
@@ -186,10 +188,11 @@
 	                        <td class="td">
 	                        	<span ng-bind="u.firstName"></span> <span ng-bind="u.lastName"></span>
 	                        </td>
+	                        <td class="td"><span ng-bind="u.birthDay"></span></td>
 	                        <td class="td"><span ng-bind="u.login"></span></td>
 	                        <td class="td"><span ng-bind="u.address"></span></td>
-	                        <td class="td" style="width:120px">
-	                        
+	                        <td class="td"><span ng-bind="u.about"></span></td>
+	                        <td class="td" style="width:120px!important">
 	                        	<button type="button" ng-click="ctrl.edit(u.id)" style="background:#A5EAA5;width:33%;height:30px;border-radius:4px;border:1px solid #A5EAA5">Edit</button>
 	                        	<button type="button" ng-click="ctrl.remove(u.id)" style="background:#EAA5A5;width:53%;height:30px;border-radius:4px;border:1px solid #EAA5A5">Remove</button>
 	                        </td>

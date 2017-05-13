@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import ru.akanshin.jschool.data.UserService;
 import ru.akanshin.jschool.data.model.User;
+import ru.akanshin.jschool.service.UserService;
 
 @RestController
 public class UsersRestController {
