@@ -7,8 +7,8 @@ angular.module("jschoolApp").factory('UserService', ['$http', '$q', function($ht
 	var factory = {
 	        fetchAllUsers: fetchAllUsers,
 	        createUser: createUser,
-	        updateUser:updateUser,
-	        deleteUser:deleteUser
+	        updateUser: updateUser,
+	        deleteUser: deleteUser
 	    };
 	
 	return factory;

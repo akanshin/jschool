@@ -160,9 +160,7 @@
 				
 				<div align="right">
 					<input type="submit"  value="{{!ctrl.user.id ? 'Add' : 'Update'}}" style="background:#A5A5EA;width:100px;height:30px;border-radius:4px;border:1px solid #A5A5EA" class="userForm-button" ng-disabled="userForm.$invalid">
-						
 					<button type="button" ng-click="ctrl.reset()" class="userForm-button" style="background:#EAA5A5;width:100px;height:30px;border-radius:4px;border:1px solid #EAA5A5" ng-disabled="userForm.$pristine">Reset Form</button>
-						
 				</div>	
 				
 			</form>
@@ -201,7 +199,7 @@
 				</table>
 			</div>
 		</div>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 		<script src="<c:url value='/static/js/app.js' />"></script>
 		<script src="<c:url value='/static/js/service/user_service.js' />"></script>
 		<script src="<c:url value='/static/js/controller/user_controller.js' />"></script>

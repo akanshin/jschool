@@ -2,7 +2,10 @@ package ru.akanshin.jschool.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import ru.akanshin.jschool.data.UsersDao;
 import ru.akanshin.jschool.data.model.User;
@@ -10,53 +13,53 @@ import ru.akanshin.jschool.data.model.User;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 	
-	public UserServiceImpl() {
-		UsersDao.getInstance();
-	}
+	@Autowired
+	private UsersDao usersDao;
 	
-	@Override
+	@Transactional(propagation = Propagation.SUPPORTS)
 	public List<User> getAllUsers() {
-		return UsersDao.getInstance().getAllUsers();
+		return usersDao.getAllUsers();
 	}
 
-	@Override
+	@Transactional(propagation = Propagation.SUPPORTS)
 	public User getUserById(long id) {
-		return UsersDao.getInstance().getUserById(id);
+		return usersDao.getUserById(id);
 	}
 
-	@Override
+	@Transactional(propagation = Propagation.SUPPORTS)
 	public User getUserByLogin(String login) {
-		return UsersDao.getInstance().getUserByLogin(login);
+		return usersDao.getUserByLogin(login);
 	}
 
-	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void createUser(User user) {
-		UsersDao.getInstance().createUser(user);
+		System.out.println("Insert birthday:" + user.getBirthDay().toString());
+		usersDao.createUser(user);
 	}
 
-	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void updateUser(User user) {
-		UsersDao.getInstance().updateUser(user);
+		usersDao.updateUser(user);
 	}
 
-	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void deleteUserById(long id) {
-		UsersDao.getInstance().deleteUserById(id);
+		usersDao.deleteUserById(id);
 	}
 
-	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void deleteUserByLogin(String login) {
-		UsersDao.getInstance().deleteUserByLogin(login);
+		usersDao.deleteUserByLogin(login);
 	}
 
-	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void deleteAllUsers() {
-		UsersDao.getInstance().deleteAllUsers();
+		usersDao.deleteAllUsers();
 	}
 
-	@Override
+	@Transactional(propagation = Propagation.SUPPORTS)
 	public boolean isUserExist(User user) {
-		return UsersDao.getInstance().isUserExist(user);
+		return usersDao.isUserExist(user);
 	}
 	
 }

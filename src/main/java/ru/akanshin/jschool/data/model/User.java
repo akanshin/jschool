@@ -31,6 +31,7 @@ public class User implements Serializable {
 	private String lastName;
 	
 	@Column(name = "birthDay")
+//	@JsonFormat(pattern="dd.mm.yyyy")
 	private Date birthDay;
 	
 	@Column(name = "login", nullable = false, length = 255, unique = true)
