@@ -33,7 +33,6 @@ public class UserServiceImpl implements UserService {
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void createUser(User user) {
-		System.out.println("Insert birthday:" + user.getBirthDay().toString());
 		usersDao.createUser(user);
 	}
 

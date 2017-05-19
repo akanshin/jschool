@@ -24,26 +24,26 @@ public class User implements Serializable {
 	@Column(name = "id")
 	private Long id;
 	
-	@Column(name = "firstName", nullable = false)
+	@Column(name = "first_name", nullable = false, length = 255)
 	private String firstName;
 	
-	@Column(name = "lastName", nullable = false)
+	@Column(name = "last_name", nullable = false, length = 255)
 	private String lastName;
 	
-	@Column(name = "birthDay")
+	@Column(name = "birthday")
 //	@JsonFormat(pattern="dd.mm.yyyy")
-	private Date birthDay;
+	private Date birthday;
 	
 	@Column(name = "login", nullable = false, length = 255, unique = true)
 	private String login;
 	
-	@Column(name = "password", nullable = false)
+	@Column(name = "password", nullable = false, length = 255)
 	private String password;
 	
-	@Column(name = "about")
+	@Column(name = "about", length = 1000)
 	private String about;
 	
-	@Column(name = "address")
+	@Column(name = "address", length = 255)
 	private String address;
 	
 	
@@ -66,10 +66,10 @@ public class User implements Serializable {
 		this.lastName = lastName;
 	}
 	public Date getBirthDay() {
-		return birthDay;
+		return birthday;
 	}
 	public void setBirthDay(Date birthDay) {
-		this.birthDay = birthDay;
+		this.birthday = birthDay;
 	}
 	public String getLogin() {
 		return login;
@@ -96,6 +96,27 @@ public class User implements Serializable {
 		this.address = adress;
 	}
 	
-	
-	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
 }

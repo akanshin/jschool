@@ -2,11 +2,10 @@ package ru.akanshin.jschool.data;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
-
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ru.akanshin.jschool.data.model.User;
@@ -14,40 +13,51 @@ import ru.akanshin.jschool.data.model.User;
 @Repository("usersDao")
 public class UsersDaoImpl implements UsersDao {
 
-	private EntityManager entityManager;
-
-	public UsersDaoImpl() {
-		super();
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("ru.akanshin.jschool.data");
-		entityManager = entityManagerFactory.createEntityManager();
-	}
+	@Autowired
+	private SessionFactory sessionFactory;
 
 	public List<User> getAllUsers() {
-		return entityManager.createQuery("from User", User.class).getResultList();
+		System.out.println("lol");
+		Session session = this.sessionFactory.openSession();
+		List<User> users = session.createQuery("from User", User.class).list();
+		session.close();
+		
+		for (User user : users) {
+			System.out.println("id=" + user.getId());
+		}
+		
+		return users;
 	}
 
 	public User getUserById(long id) {
-		Query query = entityManager.createQuery("from User where id = :ID", User.class);
+		Session session = this.sessionFactory.openSession();
+		
+		Query<User> query = session.createQuery("from User where id = :ID", User.class);
 		query.setParameter("ID", id);
 
-		@SuppressWarnings("unchecked")
 		List<User> users = query.getResultList();
 		if (users.isEmpty())
 			return null;
 
+		session.close();
+		
 		return users.get(0);
 	}
 
 	public User getUserByLogin(String login) {
 		if (login == null)
 			return null;
-		Query query = entityManager.createQuery("from User where upper(login) = upper(:LOGIN)", User.class);
+		
+		Session session = this.sessionFactory.openSession();
+		
+		Query<User> query = session.createQuery("from User where upper(login) = upper(:LOGIN)", User.class);
 		query.setParameter("LOGIN", login);
 
-		@SuppressWarnings("unchecked")
 		List<User> users = query.getResultList();
 		if (users.isEmpty())
 			return null;
+		
+		session.close();
 
 		return users.get(0);
 	}
@@ -56,42 +66,55 @@ public class UsersDaoImpl implements UsersDao {
 		if (user == null)
 			return;
 
-		entityManager.persist(user);
+		System.out.println("creating user in database: " + user.getFirstName());
+		
+		Session session = this.sessionFactory.openSession();
+		session.persist(user);
+		session.close();
 	}
 
 	public void updateUser(User user) {
 		if (user == null)
 			return;
 
-		entityManager.merge(user);
+		Session session = this.sessionFactory.openSession();
+		session.merge(user);
+		session.close();
 	}
 	
 	public void deleteUserById(long id) {
-		Query query = entityManager.createQuery("delete User where id = :ID");
+		Session session = this.sessionFactory.openSession();
+		
+		Query<User> query = session.createQuery("delete User where id = :ID", User.class);
 		query.setParameter("ID", id);
 		
-		entityManager.getTransaction().begin();
 		query.executeUpdate();
-		entityManager.getTransaction().commit();
+		
+		session.close();
 	}
 
 	public void deleteUserByLogin(String login) {
 		if (login == null)
 			return;
-		Query query = entityManager.createQuery("delete User where upper(login) = upper(:LOGIN)");
+		
+		Session session = this.sessionFactory.openSession();
+		
+		Query<User> query = session.createQuery("delete User where upper(login) = upper(:LOGIN)", User.class);
 		query.setParameter("LOGIN", login);
 		
-		entityManager.getTransaction().begin();
 		query.executeUpdate();
-		entityManager.getTransaction().commit();
+		
+		session.close();
 	}
 
 	public void deleteAllUsers() {
-		Query query = entityManager.createQuery("delete User");
+		Session session = this.sessionFactory.openSession();
 		
-		entityManager.getTransaction().begin();
+		Query<User> query = session.createQuery("delete User", User.class);
+		
 		query.executeUpdate();
-		entityManager.getTransaction().commit();
+		
+		session.close();
 	}
 
 	public boolean isUserExist(User user) {
