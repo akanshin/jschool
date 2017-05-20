@@ -24,11 +24,7 @@ public class UsersDaoImpl implements IUsersDao {
 	}
 
 	public User getUserById(long id) {
-		Query<User> query = sessionFactory.getCurrentSession()
-				.createQuery("from User where id = :ID", User.class);
-		query.setParameter("ID", id);
-
-		return query.uniqueResult();
+		return sessionFactory.getCurrentSession().get(User.class, id);
 	}
 
 	public User getUserByLogin(String login) {
@@ -48,7 +44,7 @@ public class UsersDaoImpl implements IUsersDao {
 			return;
 		}
 		
-		sessionFactory.getCurrentSession().persist(user);
+		sessionFactory.getCurrentSession().save(user);
 	}
 
 	public void updateUser(User user) {
