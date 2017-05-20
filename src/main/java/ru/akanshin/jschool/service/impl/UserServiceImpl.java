@@ -1,4 +1,4 @@
-package ru.akanshin.jschool.service;
+package ru.akanshin.jschool.service.impl;
 
 import java.util.List;
 
@@ -7,14 +7,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import ru.akanshin.jschool.data.UsersDao;
+import ru.akanshin.jschool.data.IUsersDao;
 import ru.akanshin.jschool.data.model.User;
+import ru.akanshin.jschool.service.IUserService;
 
 @Service("userService")
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements IUserService {
 	
 	@Autowired
-	private UsersDao usersDao;
+	private IUsersDao usersDao;
 	
 	@Transactional(propagation = Propagation.SUPPORTS)
 	public List<User> getAllUsers() {

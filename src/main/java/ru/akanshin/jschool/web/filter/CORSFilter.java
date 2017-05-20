@@ -1,4 +1,4 @@
-package ru.akanshin.jschool.configuration;
+package ru.akanshin.jschool.web.filter;
 
 import java.io.IOException;
 

@@ -4,7 +4,7 @@ import java.util.List;
 
 import ru.akanshin.jschool.data.model.User;
 
-public interface UsersDao {
+public interface IUsersDao {
 	
 	List<User> getAllUsers();
 	

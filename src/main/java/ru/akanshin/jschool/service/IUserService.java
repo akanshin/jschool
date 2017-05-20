@@ -4,7 +4,7 @@ import java.util.List;
 
 import ru.akanshin.jschool.data.model.User;
 
-public interface UserService {
+public interface IUserService {
 	List<User> getAllUsers();
 	
 	User getUserById(long id);

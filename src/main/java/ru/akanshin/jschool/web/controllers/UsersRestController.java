@@ -1,4 +1,4 @@
-package ru.akanshin.jschool.controller;
+package ru.akanshin.jschool.web.controllers;
 
 import java.util.List;
 
@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import ru.akanshin.jschool.data.model.User;
-import ru.akanshin.jschool.service.UserService;
+import ru.akanshin.jschool.service.IUserService;
 
 @RestController
 public class UsersRestController {
 
 	@Autowired
-	UserService userService;
+	IUserService userService;
  
     
     //-------------------Retrieve All Users--------------------------------------------------------
