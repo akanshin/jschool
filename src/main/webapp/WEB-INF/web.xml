@@ -59,7 +59,7 @@
     <!-- Hibernate Filter -->
     <filter>
         <filter-name>hibernateFilter</filter-name>
-        <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
+        <filter-class>org.springframework.orm.hibernate5.support.OpenSessionInViewFilter</filter-class>
         <async-supported>true</async-supported>
         <init-param>
             <param-name>singleSession</param-name>

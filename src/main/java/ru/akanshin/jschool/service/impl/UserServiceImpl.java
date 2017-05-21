@@ -18,6 +18,7 @@ public class UserServiceImpl implements IUserService {
 	private IUsersDao usersDao;
 	
 	@Transactional(propagation = Propagation.SUPPORTS)
+	//@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public List<User> getAllUsers() {
 		return usersDao.getAllUsers();
 	}
