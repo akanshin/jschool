@@ -29,16 +29,25 @@ public class UserServiceImpl implements IUserService {
 
 	@Transactional(propagation = Propagation.SUPPORTS)
 	public User getUserByLogin(String login) {
+		if (login == null) {
+			return null;
+		}
 		return usersDao.getUserByLogin(login);
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void createUser(User user) {
+		if (user == null) {
+			return;
+		}
 		usersDao.createUser(user);
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void updateUser(User user) {
+		if (user == null) {
+			return;
+		}
 		usersDao.updateUser(user);
 	}
 
@@ -49,6 +58,10 @@ public class UserServiceImpl implements IUserService {
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void deleteUserByLogin(String login) {
+		if (login == null) {
+			return;
+		}
+
 		usersDao.deleteUserByLogin(login);
 	}
 
@@ -59,6 +72,9 @@ public class UserServiceImpl implements IUserService {
 
 	@Transactional(propagation = Propagation.SUPPORTS)
 	public boolean isUserExist(User user) {
+		if (user == null) {
+			return false;
+		}
 		return usersDao.isUserExist(user);
 	}
 	

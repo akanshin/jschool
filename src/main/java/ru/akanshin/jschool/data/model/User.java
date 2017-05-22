@@ -6,8 +6,11 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * @author akanshin
@@ -20,7 +23,7 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
 	
@@ -31,7 +34,7 @@ public class User implements Serializable {
 	private String lastName;
 	
 	@Column(name = "birthday")
-//	@JsonFormat(pattern="dd.mm.yyyy")
+	@Temporal(TemporalType.DATE)
 	private Date birthday;
 	
 	@Column(name = "login", nullable = false, length = 255, unique = true)
@@ -40,7 +43,7 @@ public class User implements Serializable {
 	@Column(name = "password", nullable = false, length = 255)
 	private String password;
 	
-	@Column(name = "about", length = 1000)
+	@Column(name = "about", length = 1024)
 	private String about;
 	
 	@Column(name = "address", length = 255)
@@ -65,10 +68,10 @@ public class User implements Serializable {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public Date getBirthDay() {
+	public Date getBirthday() {
 		return birthday;
 	}
-	public void setBirthDay(Date birthDay) {
+	public void setBirthday(Date birthDay) {
 		this.birthday = birthDay;
 	}
 	public String getLogin() {
@@ -118,5 +121,10 @@ public class User implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", birthday=" + birthday
+				+ ", login=" + login + ", password=" + password + ", about=" + about + ", address=" + address + "]";
 	}
 }

@@ -81,7 +81,7 @@ public class UsersRestController {
         currentUser.setPassword(user.getPassword());
         currentUser.setFirstName(user.getFirstName());
         currentUser.setLastName(user.getLastName());
-        currentUser.setBirthDay(user.getBirthDay());
+        currentUser.setBirthday(user.getBirthday());
         currentUser.setAbout(user.getAbout());
         currentUser.setAddress(user.getAddress());
          

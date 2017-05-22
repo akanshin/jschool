@@ -2,7 +2,7 @@
 
 angular.module('jschoolApp').controller('UserController', ['$scope', 'UserService', function($scope, UserService) {
 	var self = this;
-    self.user={id:null,firstName:'',lastName:'',firstName:'',birthDay:'dd.MM.yyyy',login:'',password:'',about:'',address:''};
+    self.user={id:null,firstName:'',lastName:'',firstName:'',birthday:null,login:'',password:'',about:'',address:''};
     self.users=[];
 
     self.submit = submit;
@@ -56,7 +56,7 @@ angular.module('jschoolApp').controller('UserController', ['$scope', 'UserServic
     }
     
     function submit() {
-        if (self.user.id == null) {
+        if (self.user.id === null) {
             console.log('Saving New User', self.user);
             createUser(self.user);
         } else {
@@ -69,7 +69,7 @@ angular.module('jschoolApp').controller('UserController', ['$scope', 'UserServic
     function edit(id) {
         console.log('id to be edited', id);
         for (var i = 0; i < self.users.length; i++) {
-        	if (self.users[i].id == id) {
+        	if (self.users[i].id === id) {
             	self.user = angular.copy(self.users[i]);
             	
                 break;
@@ -79,7 +79,7 @@ angular.module('jschoolApp').controller('UserController', ['$scope', 'UserServic
     
     function remove(id) {
         console.log('id to be deleted', id);
-        if (self.user.id == id) {
+        if (self.user.id === id) {
             reset();
         }
         deleteUser(id);
@@ -87,7 +87,7 @@ angular.module('jschoolApp').controller('UserController', ['$scope', 'UserServic
     
     
     function reset() {
-        self.user={id:null,firstName:'',lastName:'',firstName:'',birthDay:null,login:'',password:'',about:'',address:''};
+        self.user={id:null,firstName:'',lastName:'',firstName:'',birthday:null,login:'',password:'',about:'',address:''};
         $scope.userForm.$setPristine();
     }
     

@@ -1,8 +1,11 @@
 package ru.akanshin.jschool.data.dao;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -19,7 +22,7 @@ public class UsersDaoImpl implements IUsersDao {
 	public List<User> getAllUsers() {
 		List<User> users = sessionFactory.getCurrentSession()
 				.createQuery("from User", User.class).list();
-		
+
 		return users;
 	}
 
@@ -28,10 +31,6 @@ public class UsersDaoImpl implements IUsersDao {
 	}
 
 	public User getUserByLogin(String login) {
-		if (login == null) {
-			return null;
-		}
-		
 		Query<User> query = sessionFactory.getCurrentSession()
 				.createQuery("from User where upper(login) = upper(:LOGIN)", User.class);
 		query.setParameter("LOGIN", login);
@@ -40,45 +39,49 @@ public class UsersDaoImpl implements IUsersDao {
 	}
 
 	public void createUser(User user) {
-		if (user == null) {
-			return;
-		}
-		
 		sessionFactory.getCurrentSession().save(user);
 	}
 
 	public void updateUser(User user) {
-		if (user == null) {
-			return;
-		}
-
+		Logger.getLogger("Hibernate").log(Level.INFO, "#### update: " + user.toString());
+		Transaction transaction = sessionFactory.getCurrentSession().beginTransaction();
 		sessionFactory.getCurrentSession().merge(user);
+		sessionFactory.getCurrentSession().flush();
+		transaction.commit();
 	}
-	
+
+	@SuppressWarnings("rawtypes")
 	public void deleteUserById(long id) {
-		Query<User> query = sessionFactory.getCurrentSession()
-				.createQuery("delete User where id = :ID", User.class);
+		Transaction transaction = sessionFactory.getCurrentSession().beginTransaction();
+		
+		Query query = sessionFactory.getCurrentSession()
+				.createQuery("delete User where id = :ID");
 		query.setParameter("ID", id);
-		
+
 		query.executeUpdate();
+		
+		transaction.commit();
 	}
 
+	@SuppressWarnings("rawtypes")
 	public void deleteUserByLogin(String login) {
-		if (login == null) {
-			return;
-		}
+		Transaction transaction = sessionFactory.getCurrentSession().beginTransaction();
 		
-		Query<User> query = sessionFactory.getCurrentSession()
-				.createQuery("delete User where upper(login) = upper(:LOGIN)", User.class);
+		
+		Query query = sessionFactory.getCurrentSession()
+				.createQuery("delete User where upper(login) = upper(:LOGIN)");
 		query.setParameter("LOGIN", login);
-		
+
 		query.executeUpdate();
+		
+		transaction.commit();
 	}
 
+	@SuppressWarnings("rawtypes")
 	public void deleteAllUsers() {
-		Query<User> query = sessionFactory.getCurrentSession()
-				.createQuery("delete User", User.class);
-		
+		Query query = sessionFactory.getCurrentSession()
+				.createQuery("delete User");
+
 		query.executeUpdate();
 	}
 
