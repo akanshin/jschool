@@ -86,7 +86,6 @@
 
 						<div style="width:50%;background-color: #E7EAE7;margin: auto;margin-top: 20px;margin-bottom: 20px;border-radius: 4px">
 							<form name="userForm" ng-submit="ctrl.submit()" class="userForm">
-					
 								<input type="hidden" ng-model="ctrl.user.id"/>
 								<table>
 									<caption style="font-size:32">Пользователь</caption>
