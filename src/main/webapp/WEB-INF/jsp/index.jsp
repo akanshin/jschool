@@ -83,7 +83,6 @@
 	</head>
 	<body ng-app="jschoolApp" class="ng-cloak">
 		<div class="generic-container" ng-controller="UserController as ctrl">
-
 						<div style="width:50%;background-color: #E7EAE7;margin: auto;margin-top: 20px;margin-bottom: 20px;border-radius: 4px">
 							<form name="userForm" ng-submit="ctrl.submit()" class="userForm">
 								<input type="hidden" ng-model="ctrl.user.id"/>
