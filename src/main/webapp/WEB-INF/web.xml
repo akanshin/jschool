@@ -70,16 +70,5 @@
         <filter-name>hibernateFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    
-    <!-- CORS Filter -->
-    <filter>
-        <filter-name>corsFilter</filter-name>
-        <filter-class>ru.akanshin.jschool.web.filter.CORSFilter</filter-class>
-        <async-supported>true</async-supported>
-    </filter>
-    <filter-mapping>
-        <filter-name>corsFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    
+
 </web-app>
