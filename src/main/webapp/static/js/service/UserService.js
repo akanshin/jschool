@@ -20,15 +20,15 @@ angular.module("jschoolApp").factory('UserService', ['$http', '$q', function($ht
 	
     function fetchAllUsers() {
         var deferred = $q.defer();
-        $http.get(REST_SERVICE_URI) // Выполняем GET запрос
+        //выполняем запрос на получение списка пользователей
+        //если данные успешно приняты выполним  deferred.resolve()
+        //если произошла ошибка выполним deferred.reject()
+        $http.get(REST_SERVICE_URI)
             .then(
             function (response) {
-                deferred.resolve(response.data);
+                deferred.resolve(response.data); //
             },
             function(errResponse){
-            	var msg = 'Возникла ошибка при запросе списка пользователей';
-                console.error(msg);
-                alert(msg);
                 deferred.reject(errResponse);
             }
         );
@@ -40,15 +40,15 @@ angular.module("jschoolApp").factory('UserService', ['$http', '$q', function($ht
     
     function createUser(user) {
         var deferred = $q.defer();
+        //выполняем запрос на создание нового пользователя
+        //если пользователь успешно создан выполним  deferred.resolve()
+        //если произошла ошибка выполним deferred.reject()
         $http.post(REST_SERVICE_URI, user)
             .then(
             function (response) {
                 deferred.resolve(response.data);
             },
             function(errResponse){
-            	var msg = 'Возникла ошибка при создании пользователя';
-                console.error(msg);
-                alert(msg);
                 deferred.reject(errResponse);
             }
         );
@@ -60,15 +60,15 @@ angular.module("jschoolApp").factory('UserService', ['$http', '$q', function($ht
 
     function updateUser(user, id) {
         var deferred = $q.defer();
+        //выполняем запрос на обновление пользователя
+        //если пользователь обновлен успешно выполним  deferred.resolve()
+        //если произошла ошибка выполним deferred.reject()
         $http.put(REST_SERVICE_URI + id, user)
             .then(
             function (response) {
                 deferred.resolve(response.data);
             },
             function(errResponse){
-            	var msg = 'Возникла ошибка при обновлении пользователя';
-                console.error(msg);
-                alert(msg);
                 deferred.reject(errResponse);
             }
         );
@@ -80,15 +80,15 @@ angular.module("jschoolApp").factory('UserService', ['$http', '$q', function($ht
 
     function deleteUser(id) {
         var deferred = $q.defer();
+        //выполняем запрос на удаление пользователя
+        //если пользователь удален успешно выполним  deferred.resolve()
+        //если произошла ошибка выполним deferred.reject()
         $http.delete(REST_SERVICE_URI + id)
             .then(
             function (response) {
                 deferred.resolve(response.data);
             },
             function(errResponse){
-            	var msg = 'Возникла ошибка при удалении пользователя';
-                console.error(msg);
-                alert(msg);
                 deferred.reject(errResponse);
             }
         );

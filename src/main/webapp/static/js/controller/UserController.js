@@ -2,7 +2,7 @@
 
 angular.module('jschoolApp').controller('UserController', ['$scope', 'UserService', function($scope, UserService) {
 	var self = this;
-    self.user={id:null,firstName:'',lastName:'',firstName:'',birthday:null,login:'',password:'',about:'',address:''};
+    self.user={id:null,firstName:'',lastName:'',firstName:'',birthday:'',login:'',password:'',about:'',address:''};
     self.users=[];
 
     self.submit = submit;
@@ -10,74 +10,119 @@ angular.module('jschoolApp').controller('UserController', ['$scope', 'UserServic
     self.remove = remove;
     self.reset = reset;
     
-    
+    //сразу запросим список пользователей
     fetchAllUsers();
     
+    
+    /** Получение списка всех пользователей **/
+    
     function fetchAllUsers() {
+    	//запросим список пользователей
+    	//в случае успеха сохраним данные
+    	//в случае ошибки выведем сообщение об ошибке
         UserService.fetchAllUsers()
             .then( 
             	function(d) {
                    self.users = d;
             	},
             	function(errResponse ){
-            	   console.error('Error while fetching Users');
+                	var msg = 'Возникла ошибка при запросе списка пользователей';
+                    console.error(msg);
+                    alert(msg);
             	}
             );
     }
     
+    
+    /** Создание нового пользователя **/
+    
     function createUser(user) {
+    	//создадим нового пользователя
+    	//в случае успеха обновим список
+    	//в случае ошибки выведем сообщение об ошибке
         UserService.createUser(user)
             .then(
             fetchAllUsers,
             function(errResponse ){
-                console.error('Error while creating User');
+            	var msg = 'Возникла ошибка при создании пользователя';
+                console.error(msg);
+                alert(msg);
             }
         );
     }
     
+    
+    /** Обновление пользователя **/
+    
     function updateUser(user, id) {
+    	//обновим пользователя
+    	//в случае успеха обновим список
+    	//в случае ошибки выведем сообщение об ошибке
         UserService.updateUser(user, id)
             .then(
             fetchAllUsers,
             function(errResponse) {
-                console.error('Error while updating User');
+            	var msg = 'Возникла ошибка при обновлении пользователя';
+                console.error(msg);
+                alert(msg);
             }
         );
     }
     
+    
+    /** Удаление пользователя **/
+    
     function deleteUser(id) {
+    	//удалим пользователя
+    	//в случае успеха обновим список
+    	//в случае ошибки выведем сообщение об ошибке
         UserService.deleteUser(id)
             .then(
             fetchAllUsers,
             function(errResponse) {
-                console.error('Error while deleting User');
+            	var msg = 'Возникла ошибка при удалении пользователя';
+                console.error(msg);
+                alert(msg);
             }
         );
     }
     
+    
+    /** Обработка пользователя **/
+    
     function submit() {
+    	//если пользователь не имеет id, то создадим его
+    	//иначе обновим пользователя
+    	//после очистим данные формы
         if (self.user.id === null) {
-            console.log('Saving New User', self.user);
+            console.log('Saving new user', self.user);
             createUser(self.user);
         } else {
+            console.log('Updating user with id =', self.user.id);
             updateUser(self.user, self.user.id);
-            console.log('User updated with id ', self.user.id);
         }
         reset();
     }
     
+    
+    /** Редактирование пользователя **/
+    
     function edit(id) {
-        console.log('id to be edited', id);
-        for (var i = 0; i < self.users.length; i++) {
-        	if (self.users[i].id === id) {
-            	self.user = angular.copy(self.users[i]);
-            	
+    	//найдем пользователя с таким id и поместим его в форму
+        console.log('edit: id =', id);
+        for (var u in self.users) {
+        	if (u.id === id) {
+            	self.user = angular.copy(u);
                 break;
             }
         }
     }
     
+    
+    /** Удаление пользователя **/
+    
     function remove(id) {
+    	//удалим пользователя по id
         console.log('id to be deleted', id);
         if (self.user.id === id) {
             reset();
@@ -86,13 +131,12 @@ angular.module('jschoolApp').controller('UserController', ['$scope', 'UserServic
     }
     
     
-    function reset() {
-        self.user={id:null,firstName:'',lastName:'',firstName:'',birthday:null,login:'',password:'',about:'',address:''};
-        $scope.userForm.$setPristine();
-    }
+    /** Очистка данных пользователя **/
     
-    function getFormatedDateString(date) {
-    	return date.getDay()+"."+date.getMonth()+"."+date.getFullYear();
+    function reset() {
+    	//очистим данные формы и user
+        self.user={id:null,firstName:'',lastName:'',firstName:'',birthday:'',login:'',password:'',about:'',address:''};
+        $scope.userForm.$setPristine();
     }
     
 }]);

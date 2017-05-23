@@ -44,12 +44,4 @@
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
     
-    <bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper">
-    	<property name="dateFormat">
-    		<bean class="java.text.SimpleDateFormat">
-    			<constructor-arg type="java.lang.String" value="dd.MM.yyyy"/>
-    		</bean>
-    	</property>
-    </bean>
-    
 </beans>

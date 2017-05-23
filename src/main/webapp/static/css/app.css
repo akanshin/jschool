@@ -46,6 +46,10 @@ input {
 	width: 100%;
 }
 
+caption {
+	font-size: 32px;
+}
+
 .input-submit {
 	width: 150px;
 	font-size: 14px;

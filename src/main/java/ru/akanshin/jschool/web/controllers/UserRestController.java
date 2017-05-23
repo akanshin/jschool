@@ -55,16 +55,14 @@ public class UserRestController {
 	/** Создание пользователя **/
 
 	@RequestMapping(value = "/user/", method = RequestMethod.POST)
-	public ResponseEntity<Void> createUser(@RequestBody User user, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity<Void> createUser(@RequestBody User user) {
 		if (userService.isUserExist(user)) { // Если такой пользователь с таким логином существует
 			return new ResponseEntity<Void>(HttpStatus.CONFLICT); // Возвращаем статус  CONFLICT
 		}
 
 		userService.createUser(user); // Создаем пользователя
 
-		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("/user/{id}").buildAndExpand(user.getId()).toUri());
-		return new ResponseEntity<Void>(headers, HttpStatus.CREATED); // Возвращаем статус CREATED
+		return new ResponseEntity<Void>(HttpStatus.CREATED); // Возвращаем статус CREATED
 	}
 
 	

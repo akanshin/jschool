@@ -13,7 +13,7 @@
 				<form name="userForm" ng-submit="ctrl.submit()">
 					<input type="hidden" ng-model="ctrl.user.id"/>
 					<table class="user-table">
-						<caption style="font-size:32">Пользователь</caption>
+                        <caption>Пользователь</caption>
 						<tr>
 							<td valign="middle" style="width:20%">Имя *</td>
 							<td valign="middle" style="width:60%">
@@ -30,7 +30,7 @@
 						<tr>
 							<td valign="middle">День рождения </td>
 							<td valign="middle">
-								<input type="date" name="birthday" ng-model="ctrl.user.birthday"data-date-format="dd.MM.yyyy">
+								<input type="text" name="birthday" ng-model="ctrl.user.birthday" placeholder="гггг-мм-дд">
 							</td>
 						</tr>
 						<tr>
@@ -69,20 +69,16 @@
 								<textarea name="about" wrap="soft" ng-model="ctrl.user.about" placeholder="Напишите что-нибудь о себе"></textarea>
 							</td>
 						</tr>
-						
 					</table >
-					
 					<div align="center" class="user-table submit-user-form">
 						<input type="submit" class="input-submit" value="{{!ctrl.user.id ? 'Добавить' : 'Обновить'}}" ng-disabled="userForm.$invalid">
-						<button type="button" ng-click="ctrl.reset()" ng-disabled="userForm.$pristine">Очистить форму</button>
+						<button type="button" ng-click="ctrl.reset()">Очистить форму</button>
 					</div>	
-					
 				</form>
 			</div>
-
 			<div class="users-field">
 				<table class="users-table">
-					<caption style="font-size:32">Список пользователей</caption>
+					<caption>Список пользователей</caption>
 					<thead>
 	                    <tr class="tr">
 	                        <th class="th">ID.</th>
@@ -90,7 +86,7 @@
 	                        <th class="th">Дата рождения</th>
 	                        <th class="th">Логин</th>
 	                        <th class="th">Адрес</th>
-	                        <th class="th prelast" id="last">О себе</th>
+	                        <th class="th prelast">О себе</th>
 	                        <th class="th" ></th>
 	                    </tr>
 	                </thead>
