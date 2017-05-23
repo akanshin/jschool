@@ -110,9 +110,9 @@ angular.module('jschoolApp').controller('UserController', ['$scope', 'UserServic
     function edit(id) {
     	//найдем пользователя с таким id и поместим его в форму
         console.log('edit: id =', id);
-        for (var u in self.users) {
-        	if (u.id === id) {
-            	self.user = angular.copy(u);
+        for (var i = 0; i < self.users.length; i++) {
+        	if (self.users[i].id === id) {
+            	self.user = angular.copy(self.users[i]);
                 break;
             }
         }

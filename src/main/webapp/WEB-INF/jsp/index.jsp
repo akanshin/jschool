@@ -19,18 +19,27 @@
 							<td valign="middle" style="width:60%">
 								<input type="text" name="firstName" ng-model="ctrl.user.firstName" placeholder="Введите ваше имя" required>
 							</td>
-                            <td style="width:20%"> </td>
+                            <td style="width:20%">
+                                <div class="has-error" ng-show="userForm.firstName.$dirty">
+                                    <span ng-show="userForm.firstName.$error.required"> Это поле необходимо</span>
+                                </div>
+                            </td>
 						</tr>
 						<tr>
 							<td valign="middle">Фамилия *</td>
 							<td valign="middle">
 								<input type="text" name="lastName" ng-model="ctrl.user.lastName" placeholder="Введите вашу фамилию" required>
 							</td>
+                            <td style="width:20%">
+                                <div class="has-error" ng-show="userForm.lastName.$dirty">
+                                    <span ng-show="userForm.lastName.$error.required"> Это поле необходимо</span>
+                                </div>
+                            </td>
 						</tr>
 						<tr>
 							<td valign="middle">День рождения </td>
 							<td valign="middle">
-								<input type="text" name="birthday" ng-model="ctrl.user.birthday" placeholder="гггг-мм-дд">
+								<input type="text" name="birthday" pattern="[0-9]{4}-[0-1]{1}[0-9]{1}-[0-3]{1}[0-9]{1}" ng-model="ctrl.user.birthday" placeholder="гггг-мм-дд">
 							</td>
 						</tr>
 						<tr>
@@ -40,8 +49,8 @@
 							</td>
                             <td>
                                 <div class="has-error" ng-show="userForm.login.$dirty">
-                                    <span ng-show="userForm.login.$error.minlength">Минимум 3 символа</span>
-                                    <span ng-show="userForm.login.$error.required">Это поле необходимо</span>
+                                    <span ng-show="userForm.login.$error.minlength"> Минимум 3 символа</span>
+                                    <span ng-show="userForm.login.$error.required"> Это поле необходимо</span>
                                 </div>
                             </td>
 						</tr>
@@ -52,8 +61,8 @@
 							</td>
                             <td>
                                 <div class="has-error" ng-show="userForm.password.$dirty">
-                                    <span ng-show="userForm.password.$error.minlength">Минимум 6 символов</span>
-                                    <span ng-show="userForm.password.$error.required">Это поле необходимо</span>
+                                    <span ng-show="userForm.password.$error.minlength"> Минимум 6 символов</span>
+                                    <span ng-show="userForm.password.$error.required"> Это поле необходимо</span>
                                 </div>
                             </td>
 						</tr>
