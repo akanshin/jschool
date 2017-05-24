@@ -27,7 +27,6 @@ public class User implements Serializable {
 	@Column(name = "id")
 	private Long id;
 	
-	
 	@Column(name = "first_name", nullable = false, length = 255)
 	private String firstName;
 	
@@ -49,7 +48,6 @@ public class User implements Serializable {
 	
 	@Column(name = "address", length = 255)
 	private String address;
-	
 	
 	public Long getId() {
 		return id;
@@ -107,6 +105,7 @@ public class User implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -123,6 +122,7 @@ public class User implements Serializable {
 			return false;
 		return true;
 	}
+	
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", birthday=" + birthday

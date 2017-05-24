@@ -1,9 +1,8 @@
-package ru.akanshin.jschool.data;
+package ru.akanshin.jschool.data.dao;
 
 import java.util.List;
 
 import ru.akanshin.jschool.data.model.User;
-
 
 /**
  * @author akanshin

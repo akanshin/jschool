@@ -8,6 +8,7 @@ import ru.akanshin.jschool.data.model.User;
  * @author akanshin
  * @version 1.0
  */
+
 public interface IUserService {
 	List<User> getAllUsers();
 	
